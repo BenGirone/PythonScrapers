@@ -61,28 +61,28 @@ class Frame(object):
 
     @property
     def video(self):
-        return self.__rawParams['video']
+        return self.__rawParams.get('video', None)
     @property
     def image(self):
-        return self.__rawParams['image']
+        return self.__rawParams.get('image', None)
     @property
     def text(self):
-        return self.__rawParams['text']
+        return self.__rawParams.get('text', None)
     @property
     def additionalText(self):
-        return self.__rawParams['additionalText']
+        return self.__rawParams.get('additionalText', None)
     @property
     def positiveMetric(self):
-        return self.__rawParams['positiveMetric']
+        return self.__rawParams.get('positiveMetric', None)
     @property
     def negativeMetric(self):
-        return self.__rawParams['negativeMetric']
+        return self.__rawParams.get('negativeMetric', None)
     @property
     def interactionMetric(self):
-        return self.__rawParams['interactionMetric']
+        return self.__rawParams.get('interactionMetric', None)
     @property
     def reference(self):
-        return self.__rawParams['reference']
+        return self.__rawParams.get('reference', None)
 
     def toJson(self):
         return json.dumps(self.__rawParams)
