@@ -5,7 +5,7 @@ import wget
 HEADERS = {'User-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36'}
 
 class Scraper(object):
-    def __init__(self, params,):
+    def __init__(self, params):
         self.params = params
         self.chunks = []
         self.scraperSession = requests.Session()
