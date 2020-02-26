@@ -19,7 +19,6 @@ class DuckDuckGo(ScraperLib.Scraper):
         self.vqd = re.search(VQD_REGEX, page).group(1)
         self.chunks.append(ScraperLib.Chunk('i.js?l=us-en&o=json&q=' + '+'.join(self.query.split(' ')) + '&vqd=' + self.vqd + '&f=size:Wallpaper,,,&p=' + self.filter + '&v7exp=a'))
         
-        self.canScrape = True
         self.scrape()
 
     def scrape(self):

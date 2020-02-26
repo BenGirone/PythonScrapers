@@ -11,6 +11,7 @@ class Scraper(object):
         self.scraperSession = requests.Session()
         self.scraperSession.headers = HEADERS
         self.frames = []
+        self.canScrape = True
 
     def scrape(self):
         # Bring down content
@@ -21,12 +22,11 @@ class Scraper(object):
     def __getitem__(self, key):
         if isinstance(key, slice):
             start = key.start or 0
-            stop = key.stop or len(self)
+            stop = key.stop or self.maxLen
             step = key.step or 1
 
-            if step < 0:
-                start = key.start or len(self) - 1
-                stop = key.stop or 0
+            if (min(start, stop, step) < 0 or start >= stop):
+                raise Exception('Bad slice')
             
             items = []
             for i in range(start, stop, step):
@@ -34,6 +34,7 @@ class Scraper(object):
                 if item:
                     items.append(item)
                 else:
+                    self.canScrape = False
                     break
             
             return items
@@ -44,11 +45,16 @@ class Scraper(object):
                 if self.scrape():
                     return self[key]
                 else:
+                    self.canScrape = False
                     return None
                 
 
     def __len__(self):
         return len(self.frames)
+
+    @property
+    def maxLen(self):
+        return float('inf') 
 
 class Chunk(object):
     def __init__(self, recipe, size=0):

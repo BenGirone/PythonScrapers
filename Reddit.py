@@ -7,7 +7,6 @@ class Reddit(ScraperLib.Scraper):
         super().__init__(params)
         self.query = params['query']
         self.shouldGetTextAndComments = safeGet(params, 'shouldGetTextAndComments', False)
-        self.canScrape = True
         self.chunks.append(ScraperLib.Chunk(''))
         self.scrape()
 

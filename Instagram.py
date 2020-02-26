@@ -15,7 +15,6 @@ class Instagram(ScraperLib.Scraper):
         self.query = self.query.replace('#', '').replace('@', '')
         self.shouldGetTextAndComments = safeGet(params, 'shouldGetTextAndComments', False)
         self.chunks.append(ScraperLib.Chunk(None))
-        self.canScrape = True
         self.queryUrl = 'https://www.instagram.com/graphql/query/'
         self.shortcodeHash = '2b0673e0dc4580674a88d426fe00ea90'
         
@@ -58,8 +57,6 @@ class Instagram(ScraperLib.Scraper):
             self.canScrape = safeGet(responseJson, self.page_info_path + '.has_next_page')
 
             edges = safeGet(responseJson, self.edgePath, [])
-
-            self.chunks[-1].size = len(edges)
 
             for edge in edges:
                 params = {
