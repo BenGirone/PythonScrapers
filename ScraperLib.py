@@ -87,6 +87,9 @@ class Frame(object):
     def toJson(self):
         return json.dumps(self.__rawParams)
 
+    def toDict(self):
+        return self.__rawParams
+
     def save(self, aspect, path = None):
         if aspect in ['video', 'image']:
             if path == None:
